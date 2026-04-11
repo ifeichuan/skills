@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Explorer — Detail: {{QUERY}}</title>
+<style>
+  :root {
+    --bg: #0a0a0b;
+    --surface: #141416;
+    --surface-hover: #1c1c1f;
+    --border: #2a2a2e;
+    --text: #e4e4e7;
+    --text-muted: #71717a;
+    --accent: #3b82f6;
+    --accent-dim: #1e3a5f;
+    --tag-bg: #1e1e22;
+    --tag-text: #a1a1aa;
+    --radius: 12px;
+    --green: #22c55e;
+    --green-dim: #14532d;
+    --amber: #f59e0b;
+    --amber-dim: #78350f;
+    --red: #ef4444;
+    --red-dim: #7f1d1d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .header h1 span { color: var(--accent); }
+
+  .meta {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px;
+  }
+
+  /* Comparison Table */
+  .comparison-section { margin-bottom: 48px; }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  th {
+    background: var(--surface);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 11px;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    position: sticky;
+    left: 0;
+  }
+
+  th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--surface);
+  }
+
+  td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  tr:hover td { background: var(--surface-hover); }
+
+  td:first-child {
+    font-weight: 600;
+    position: sticky;
+    left: 0;
+    background: var(--bg);
+    z-index: 1;
+  }
+
+  tr:nth-child(even) td:first-child { background: rgba(20,20,22,1); }
+
+  .cell-na { color: var(--text-muted); font-style: italic; }
+
+  /* Detail Cards */
+  .detail-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .detail-card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .detail-card-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .detail-card-header h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .detail-card-header h2 a:hover { color: var(--accent); }
+
+  .detail-card-body {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .detail-card-img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .detail-field {
+    margin-bottom: 12px;
+  }
+
+  .detail-field-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .detail-field-value {
+    font-size: 14px;
+  }
+
+  .badge-highlight {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--green-dim);
+    color: var(--green);
+    border: 1px solid var(--green);
+    margin: 2px 4px 2px 0;
+  }
+
+  .badge-caveat {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--amber-dim);
+    color: var(--amber);
+    border: 1px solid var(--amber);
+    margin: 2px 4px 2px 0;
+  }
+
+  /* Recommendation Box */
+  .recommendation {
+    background: var(--accent-dim);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-top: 32px;
+  }
+
+  .recommendation h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .recommendation p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .footer {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px 32px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .header { padding: 16px; }
+    .content { padding: 16px; }
+    .detail-card-body { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>Design Explorer — Detail: <span>{{QUERY}}</span></h1>
+    <div class="meta">
+      <div class="meta-item">{{COMPONENT_COUNT}} components analyzed</div>
+      <div class="meta-item">{{TIMESTAMP}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!--
+  HOW TO USE THIS TEMPLATE:
+
+  1. COMPARISON TABLE
+  Replace {{COMPARISON_TABLE_ROWS}} with <tr> elements:
+  <tr>
+    <td>Component Name</td>
+    <td>12.3 kB</td>
+    <td>3</td>
+    <td>MIT</td>
+    <td>45,000</td>
+    <td>12,500</td>
+    <td>2026-04-01</td>
+  </tr>
+
+  For design-inspiration sites without npm/GitHub data:
+  <tr>
+    <td>Dribbble Shot Name</td>
+    <td class="cell-na">N/A</td>
+    <td class="cell-na">N/A</td>
+    <td class="cell-na">N/A</td>
+    <td class="cell-na">N/A</td>
+    <td class="cell-na">N/A</td>
+    <td class="cell-na">N/A</td>
+  </tr>
+
+  2. DETAIL SECTIONS
+  Replace {{DETAIL_SECTIONS}} with detail-card blocks:
+  <div class="detail-card">
+    <div class="detail-card-header">
+      <h2><a href="URL" target="_blank">Component Name</a></h2>
+    </div>
+    <div class="detail-card-body">
+      <div>
+        <img class="detail-card-img" src="screenshot.png" alt="Component Name">
+      </div>
+      <div>
+        <div class="detail-field">
+          <div class="detail-field-label">Bundle Size</div>
+          <div class="detail-field-value">12.3 kB (gzip)</div>
+        </div>
+        ...more fields...
+        <div class="detail-field">
+          <div class="detail-field-label">Highlights</div>
+          <div class="detail-field-value">
+            <span class="badge-highlight">Accessible</span>
+            <span class="badge-highlight">Tree-shakeable</span>
+          </div>
+        </div>
+        <div class="detail-field">
+          <div class="detail-field-label">Caveats</div>
+          <div class="detail-field-value">
+            <span class="badge-caveat">Large bundle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  3. RECOMMENDATION
+  Replace {{RECOMMENDATION}} with the AI's analysis text.
+-->
+
+<!-- Comparison Table -->
+<div class="comparison-section">
+  <div class="section-title">Comparison</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Bundle Size</th>
+          <th>Dependencies</th>
+          <th>License</th>
+          <th>Weekly Downloads</th>
+          <th>GitHub Stars</th>
+          <th>Last Updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{COMPARISON_TABLE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Detail Cards -->
+<div class="section-title">Detailed Analysis</div>
+{{DETAIL_SECTIONS}}
+
+<!-- Recommendation -->
+<div class="recommendation">
+  <h2>Recommendation</h2>
+  <p>{{RECOMMENDATION}}</p>
+</div>
+
+</div>
+
+<div class="footer">
+  Generated by Design Explorer · Detailed analysis report
+</div>
+
+</body>
+</html>
