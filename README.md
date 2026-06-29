@@ -6,6 +6,8 @@ My collection of Claude Code skills.
 
 ```bash
 npx @anthropic-ai/claude-code-skills add ifeichuan/skills/<skill-name>
+# or
+npx skills add ifeichuan/skills/<skills-name>
 ```
 
 ## Available Skills
