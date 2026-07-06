@@ -1,0 +1,5 @@
+{
+  "name": "prompt-logger",
+  "version": "1.0.0",
+  "description": "Log user prompts to Obsidian vault via CLI on UserPromptSubmit"
+}
