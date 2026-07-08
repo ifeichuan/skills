@@ -1,5 +1,10 @@
 {
   "name": "prompt-logger",
-  "version": "1.0.0",
-  "description": "Log user prompts to Obsidian vault via CLI on UserPromptSubmit"
+  "version": "2.0.0",
+  "description": "Log user prompts to Obsidian vault on every input submission.",
+  "author": {
+    "name": "feichuan",
+    "url": "https://github.com/ifeichuan"
+  },
+  "hooks": "./hooks/claude-codex-hooks.json"
 }

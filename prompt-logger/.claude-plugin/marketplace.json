@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ifeichuan-skills",
+  "description": "feichuan's skill collection for Claude Code",
+  "owner": {
+    "name": "feichuan",
+    "url": "https://github.com/ifeichuan"
+  },
+  "plugins": [
+    {
+      "name": "prompt-logger",
+      "description": "Log every user prompt to an Obsidian vault as timestamped markdown entries.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

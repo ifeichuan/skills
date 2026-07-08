@@ -1,0 +1,28 @@
+{
+  "name": "@ifeichuan/prompt-logger",
+  "version": "2.0.0",
+  "description": "Log user prompts to Obsidian vault. Supports Claude Code, Codex, and Pi.",
+  "keywords": ["claude-plugin", "pi-package", "prompt-logger", "obsidian"],
+  "author": {
+    "name": "feichuan",
+    "url": "https://github.com/ifeichuan"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifeichuan/skills.git",
+    "directory": "prompt-logger"
+  },
+  "type": "module",
+  "pi": {
+    "extensions": ["./pi-extension/index.js"]
+  },
+  "files": [
+    "hooks/",
+    "pi-extension/",
+    ".claude-plugin/",
+    "scripts/",
+    "config.json.example",
+    "README.md"
+  ]
+}
