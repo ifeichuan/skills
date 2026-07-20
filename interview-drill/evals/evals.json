@@ -1,0 +1,23 @@
+{
+  "skill_name": "interview-drill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "练一下浏览器事件循环，来几道八股",
+      "expected_output": "先给出事件循环的 3-6 句速记知识点，然后出一道场景题，等待用户回答",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "用 grill 模式深挖一下 React 的 hooks，我想练追问链",
+      "expected_output": "不给知识点，直接出一道 React hooks 场景题，等待用户回答后沿追问链深挖",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "练 HTTP 缓存。\n\n[用户回答] 强缓存就是设置 Cache-Control，命中就不发请求，过期了就走协商缓存用 ETag",
+      "expected_output": "按照反馈格式给出：判定（⚠️部分正确）、评价、完整参考答案、下一步动作",
+      "files": []
+    }
+  ]
+}
