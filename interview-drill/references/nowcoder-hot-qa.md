@@ -1,16 +1,14 @@
 ---
 title: 牛客秋招清洗版前端高频题卡
-sourceCount: 2
-lastConfirmed: 2026-07-20
+sourceCount: 45
 ---
 
-## For future Claude
+## For agent
 
-这份 reference 将秋招清洗版前端题库整理为可用于 `interview-drill` 的知识点与题卡。
+这份 reference 是 `interview-drill` 的核心题卡库。
 Agent 在 drill 模式下应优先按 frequency 降序选择题目，再结合难度、标签和易错点出题纠正。
-题库答案来自本地清洗结果，不等同于官方规范；涉及版本或规范细节时应继续核验，并将无法核验的判断标为 `uncertain`。
+题库答案不等同于官方规范；涉及版本或规范细节时应继续核验，并将无法核验的判断标为 `uncertain`。
 
-- **来源**：`/Users/feichuan/Downloads/面经/秋招清洗版/前端.jsonl`；字段报告：`/Users/feichuan/Downloads/面经/秋招清洗版/清洗报告.md`
 - **题目数**：45
 - **排序**：按 `frequency` 降序；同频题保持源文件顺序
 

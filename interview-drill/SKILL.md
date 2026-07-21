@@ -23,27 +23,23 @@ description: >
    - `guide` / `/guide` / 「引导」→ **guide**
 3. 先查 **reference** 再建题：读 [`references/sources.md`](./references/sources.md) 的索引部分，然后**只打开与当前主题相关的题卡**（不要全量读）
 
-**完成标准**：入口与模式已确定；本轮至少读过 `references/` 内一处相关材料（或源 jsonl/md），否则标 `uncertain`。
+**完成标准**：入口与模式已确定；本轮至少读过 `references/` 内一处相关材料，否则标 `uncertain`。
 
 ### 知识源（按序）
 
 1. **Skill references**（必读索引见 `references/sources.md`）
-   - `vault-interview-log.md` — 用户真实场次与题干
+   - `vault-interview-log.md` — 真实场次与题干
    - `nowcoder-hot-qa.md` — 45 张含答案题卡（默认抽卡池）
    - `nowcoder-freq-index.md` — 牛客 4.8 万条高频索引
-   - `bagu-topic-map.md` + `bagu-question-index.md` — 本地八股 640 题导航
-2. **回源正文**（reference 不够时）
-   - Vault 主题页（如 `浏览器事件循环`）与 `面试题.md`
-   - `~/Documents/前端面试题汇总/` 对应专题 md
-   - `~/Downloads/面经/` 清洗 jsonl / 全量 qa jsonl
-3. 官方文档 / 规范（HTML Standard、MDN、框架 docs）— 纠正事实冲突时优先
-4. parametric knowledge — 无法核验处标 `uncertain`
+   - `bagu-topic-map.md` + `bagu-question-index.md` — 八股 640 题导航
+2. 官方文档 / 规范（HTML Standard、MDN、框架 docs）— 纠正事实冲突时优先
+3. parametric knowledge — 无法核验处标 `uncertain`
 
 ### 选题启发式
 
 - 用户没指定主题 → 先从 `vault-interview-log` 未练点或 `nowcoder-hot-qa` 高频未练题抽
-- 用户指定专题（如 React/事件循环）→ `bagu-topic-map` 定位 → index 抽题 → 回源 md 取答
-- 需要完整速记答案且命中清洗库 → 直接用 `nowcoder-hot-qa`
+- 用户指定专题（如 React/事件循环）→ `bagu-topic-map` 定位 → index 抽题 → `nowcoder-hot-qa` 取答
+- 需要完整速记答案 → 直接用 `nowcoder-hot-qa`
 - 同 session 已练过的题干不重复，除非用户要求复测
 
 ## 回合循环
